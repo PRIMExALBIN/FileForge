@@ -56,7 +56,6 @@ export async function convertImage(
 
         await pica.resize(tempCanvas, canvas, {
             quality: 3,
-            alpha: true,
         });
     } else {
         const ctx = canvas.getContext('2d')!;

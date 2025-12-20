@@ -7,6 +7,7 @@ import {
 } from '@/components/ui/dialog';
 import { ImagePreview } from './ImagePreview';
 import { TextPreview } from './TextPreview';
+import { DataPreview } from './DataPreview';
 import { AudioPreview } from './AudioPreview';
 
 interface PreviewProps {

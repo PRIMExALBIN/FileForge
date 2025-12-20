@@ -109,7 +109,7 @@ export async function convertVideo(
 
         // Video bitrate
         if (options.videoBitrate) {
-            args.push('-b:v', options.videoBitrate);
+            args.push('-b:v', String(options.videoBitrate));
         }
 
         // Audio handling
@@ -161,5 +161,5 @@ export async function convertVideo(
         mp3: 'audio/mpeg',
     };
 
-    return new Blob([data], { type: mimeTypes[format] || 'video/mp4' });
+    return new Blob([data as any], { type: mimeTypes[format] || 'video/mp4' });
 }

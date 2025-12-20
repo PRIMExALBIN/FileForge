@@ -7,7 +7,7 @@ export interface ConversionJob {
     options: ConversionOptions;
     status: 'queued' | 'processing' | 'completed' | 'failed';
     progress: number;
-    result?: Blob;
+    result?: Blob | Blob[];
     error?: string;
     timestamp: number;
     completedAt?: number;
@@ -41,12 +41,17 @@ export interface ConversionOptions {
     bitrate?: number; // kbps
     sampleRate?: number; // Hz
     channels?: 'mono' | 'stereo';
+    normalize?: boolean;
 
     // Video options
     videoBitrate?: number;
     audioBitrate?: number;
     framerate?: number;
     resolution?: string; // e.g., "1920x1080"
+    removeAudio?: boolean;
+    trimStart?: number;
+    trimEnd?: number;
+    videoCodec?: string;
 
     // Archive options
     compressionLevel?: number; // 1-9
@@ -133,4 +138,4 @@ export type ConverterFunction = (
     outputFormat: string,
     options: ConversionOptions,
     onProgress?: (progress: number) => void
-) => Promise<Blob>;
+) => Promise<Blob | Blob[]>;

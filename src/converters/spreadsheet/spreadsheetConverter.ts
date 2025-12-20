@@ -24,7 +24,7 @@ export async function xlsxToCSV(
     const csv = XLSX.utils.sheet_to_csv(worksheet);
     onProgress?.(100);
 
-    return new Blob([csv], { type: 'text/csv' });
+    return new Blob([csv as any], { type: 'text/csv' });
 }
 
 /**
@@ -51,7 +51,7 @@ export async function csvToXLSX(
     const xlsxBuffer = XLSX.write(workbook, { type: 'array', bookType: 'xlsx' });
     onProgress?.(100);
 
-    return new Blob([xlsxBuffer], {
+    return new Blob([xlsxBuffer as any], {
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     });
 }
@@ -79,7 +79,7 @@ export async function xlsxToJSON(
     const jsonString = JSON.stringify(jsonData, null, 2);
     onProgress?.(100);
 
-    return new Blob([jsonString], { type: 'application/json' });
+    return new Blob([jsonString as any], { type: 'application/json' });
 }
 
 /**
@@ -108,7 +108,7 @@ export async function jsonToXLSX(
     const xlsxBuffer = XLSX.write(workbook, { type: 'array', bookType: 'xlsx' });
     onProgress?.(100);
 
-    return new Blob([xlsxBuffer], {
+    return new Blob([xlsxBuffer as any], {
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     });
 }
@@ -135,7 +135,7 @@ export async function csvToJSON(
     const jsonString = JSON.stringify(jsonData, null, 2);
     onProgress?.(100);
 
-    return new Blob([jsonString], { type: 'application/json' });
+    return new Blob([jsonString as any], { type: 'application/json' });
 }
 
 /**
@@ -161,5 +161,5 @@ export async function jsonToCSV(
     const csv = XLSX.utils.sheet_to_csv(worksheet);
     onProgress?.(100);
 
-    return new Blob([csv], { type: 'text/csv' });
+    return new Blob([csv as any], { type: 'text/csv' });
 }

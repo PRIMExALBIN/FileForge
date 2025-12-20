@@ -1,4 +1,4 @@
-import { FORMATS } from '@/constants/formats';
+import { FORMATS, type FormatDefinition } from '@/constants/formats';
 import type { FormatInfo, FormatCategory } from '@/types';
 
 // Magic bytes for file format detection
@@ -11,6 +11,22 @@ const MAGIC_BYTES: Record<string, { bytes: number[]; offset: number }> = {
     zip: { bytes: [0x50, 0x4b, 0x03, 0x04], offset: 0 },
     bmp: { bytes: [0x42, 0x4d], offset: 0 },
 };
+
+/**
+ * Helper to map newer FormatDefinition to app legacy FormatInfo
+ */
+function mapToFormatInfo(def: FormatDefinition, ext: string): FormatInfo {
+    return {
+        extension: ext,
+        name: def.label,
+        category: def.category,
+        mimeTypes: def.mimeTypes,
+        compatibleOutputs: def.compatibleOutputs,
+        description: def.label,
+        supportsQuality: ['jpg', 'jpeg', 'webp', 'png'].includes(ext),
+        supportsResize: def.category === 'image',
+    };
+}
 
 /**
  * Detect file format using magic bytes, MIME type, and extension
@@ -105,7 +121,7 @@ export function getFileExtension(filename: string): string {
  * Get extension from MIME type
  */
 function getExtensionFromMimeType(mimeType: string): string | null {
-    for (const [ext, info] of Object.entries(FORMATS)) {
+    for (const [ext, info] of Object.entries(FORMATS) as [string, FormatDefinition][]) {
         if (info.mimeTypes.includes(mimeType)) {
             return ext;
         }
@@ -117,14 +133,18 @@ function getExtensionFromMimeType(mimeType: string): string | null {
  * Get format info by extension
  */
 export function getFormatInfo(extension: string): FormatInfo | undefined {
-    return FORMATS[extension.toLowerCase()];
+    const def = FORMATS[extension.toLowerCase()];
+    if (!def) return undefined;
+    return mapToFormatInfo(def, extension.toLowerCase());
 }
 
 /**
  * Get all formats in a category
  */
 export function getFormatsByCategory(category: FormatCategory): FormatInfo[] {
-    return Object.values(FORMATS).filter((info) => info.category === category);
+    return (Object.entries(FORMATS) as [string, FormatDefinition][])
+        .filter(([_, info]) => info.category === category)
+        .map(([ext, info]) => mapToFormatInfo(info, ext));
 }
 
 /**

@@ -20,7 +20,7 @@ export function ConversionQueue() {
             const baseName = lastDotIndex > 0 ? originalName.substring(0, lastDotIndex) : originalName;
 
             return {
-                blob: job.result!,
+                blob: Array.isArray(job.result) ? job.result[0] : job.result!,
                 filename: `${baseName}.${job.outputFormat}`
             };
         });

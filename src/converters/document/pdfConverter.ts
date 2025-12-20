@@ -62,7 +62,7 @@ export async function imagesToPDF(
     const pdfBytes = await pdfDoc.save();
     onProgress?.(100);
 
-    return new Blob([pdfBytes], { type: 'application/pdf' });
+    return new Blob([pdfBytes as any], { type: 'application/pdf' });
 }
 
 /**
@@ -96,13 +96,14 @@ export async function pdfToImages(
         await page.render({
             canvasContext: context,
             viewport: viewport,
+            canvas: canvas,
         }).promise;
 
         const mimeType = outputFormat === 'jpg' || outputFormat === 'jpeg' ? 'image/jpeg' : 'image/png';
         const quality = (options.quality || 85) / 100;
 
         const blob = await new Promise<Blob>((resolve) => {
-            canvas.toBlob((blob) => resolve(blob!), mimeType, quality);
+            canvas.toBlob((blob) => resolve(blob as any), mimeType, quality);
         });
 
         // Add to ZIP with page number
@@ -146,7 +147,7 @@ export async function pdfToText(
         allText += `\n\n--- Page ${pageNum} ---\n\n${pageText}`;
     }
 
-    return new Blob([allText], { type: 'text/plain' });
+    return new Blob([allText as any], { type: 'text/plain' });
 }
 
 /**

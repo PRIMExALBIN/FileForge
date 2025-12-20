@@ -39,13 +39,28 @@ export function ConversionJobCard({ job }: ConversionJobCardProps) {
         const baseName = lastDotIndex > 0 ? originalName.substring(0, lastDotIndex) : originalName;
         const outputFilename = `${baseName}.${job.outputFormat}`;
 
-        downloadFile(job.result, outputFilename);
+        if (Array.isArray(job.result)) {
+            // If multiple files, we could ZIP them here or handle individually
+            // For now, let's select the first one to resolve type error, 
+            // or better, use downloadFile(job.result[0], ...)
+            if (job.result.length > 0) {
+                downloadFile(job.result[0], outputFilename);
+            }
+        } else {
+            downloadFile(job.result, outputFilename);
+        }
     };
 
     const handleCopyToClipboard = async () => {
         if (job.result && supportsClipboardCopy(job.outputFormat)) {
             try {
-                await copyBlobToClipboard(job.result);
+                if (Array.isArray(job.result)) {
+                    if (job.result.length > 0) {
+                        await copyBlobToClipboard(job.result[0]);
+                    }
+                } else {
+                    await copyBlobToClipboard(job.result);
+                }
                 // TODO: Add toast notification
                 console.log('Copied to clipboard!');
             } catch (error) {
@@ -244,7 +259,7 @@ export function ConversionJobCard({ job }: ConversionJobCardProps) {
                     <Preview
                         isOpen={showPreview}
                         onClose={() => setShowPreview(false)}
-                        file={job.result}
+                        file={Array.isArray(job.result) ? job.result[0] : job.result}
                         format={job.outputFormat}
                         filename={generateOutputFilename(job.inputFile.name, job.outputFormat)}
                     />

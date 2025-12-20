@@ -41,7 +41,7 @@ export async function docxToHTML(
 
     onProgress?.(100);
 
-    return new Blob([html], { type: 'text/html' });
+    return new Blob([html as any], { type: 'text/html' });
 }
 
 /**
@@ -63,5 +63,5 @@ export async function docxToText(
     const text = result.value;
     onProgress?.(100);
 
-    return new Blob([text], { type: 'text/plain' });
+    return new Blob([text as any], { type: 'text/plain' });
 }

@@ -35,10 +35,10 @@ export const useSettingsStore = create<SettingsState>()(
             setAutoClearDelay: (minutes) => set({ autoClearDelay: minutes }),
 
             toggleShowEstimatedTime: () =>
-                set((state) => ({ showEstimatedTime: !state.showEstimatedTime })),
+                set((state: SettingsState) => ({ showEstimatedTime: !state.showEstimatedTime })),
 
             toggleQuickConvert: () =>
-                set((state) => ({ enableQuickConvert: !state.enableQuickConvert })),
+                set((state: SettingsState) => ({ enableQuickConvert: !state.enableQuickConvert })),
         }),
         {
             name: 'file-converter-settings',
