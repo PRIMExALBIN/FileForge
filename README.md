@@ -2,7 +2,7 @@
 
 ![PLACEHOLDER: project logo](./public/pwa-512x512.png)
 
-# FileForge 🔄
+# FileForge
 
 **Universal File Converter — Fast, private, and in-browser**
 
