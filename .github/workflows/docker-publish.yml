@@ -1,9 +1,14 @@
 name: Publish Docker Image
 
+
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
 
 jobs:
   build-and-push:
