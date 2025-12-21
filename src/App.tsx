@@ -200,8 +200,6 @@ function App() {
                   </div>
 
                   <OptionsPanel
-                    inputFormat={pendingFiles[0]?.format || 'png'}
-                    outputFormat={globalOutputFormat}
                     options={globalOptions}
                     onChange={(opts) => {
                       setGlobalOptions(opts);

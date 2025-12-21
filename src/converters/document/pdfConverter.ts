@@ -63,7 +63,7 @@ export async function imagesToPDF(
     const pdfBytes = await pdfDoc.save();
     onProgress?.(100);
 
-    return new Blob([pdfBytes], { type: 'application/pdf' });
+    return new Blob([pdfBytes as any], { type: 'application/pdf' });
 }
 
 /**
@@ -148,7 +148,7 @@ export async function pdfToText(
         allText += `\n\n--- Page ${pageNum} ---\n\n${pageText}`;
     }
 
-    return new Blob([allText], { type: 'text/plain' });
+    return new Blob([allText as any], { type: 'text/plain' });
 }
 
 /**

@@ -19,6 +19,31 @@ export function FileDropzone({ onFilesAdded, className }: FileDropzoneProps) {
     const [isLoadingUrl, setIsLoadingUrl] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
+    // Process and validate files
+    const processFiles = useCallback(async (files: File[]) => {
+        const processedFiles: Array<{ file: File; format: string }> = [];
+
+        for (const file of files) {
+            // Validate file size
+            const validation = validateFileSize(file);
+            if (!validation.valid) {
+                console.error(`Skipping ${file.name}: ${validation.error}`);
+                continue;
+            }
+
+            // Detect format
+            const detection = await detectFormat(file);
+            processedFiles.push({
+                file,
+                format: detection.extension,
+            });
+        }
+
+        if (processedFiles.length > 0) {
+            onFilesAdded(processedFiles);
+        }
+    }, [onFilesAdded]);
+
     // Handle file drop
     const handleDrop = useCallback(
         async (e: React.DragEvent<HTMLDivElement>) => {
@@ -44,31 +69,6 @@ export function FileDropzone({ onFilesAdded, className }: FileDropzoneProps) {
         },
         [processFiles]
     );
-
-    // Process and validate files
-    const processFiles = useCallback(async (files: File[]) => {
-        const processedFiles: Array<{ file: File; format: string }> = [];
-
-        for (const file of files) {
-            // Validate file size
-            const validation = validateFileSize(file);
-            if (!validation.valid) {
-                console.error(`Skipping ${file.name}: ${validation.error}`);
-                continue;
-            }
-
-            // Detect format
-            const detection = await detectFormat(file);
-            processedFiles.push({
-                file,
-                format: detection.extension,
-            });
-        }
-
-        if (processedFiles.length > 0) {
-            onFilesAdded(processedFiles);
-        }
-    }, [onFilesAdded]);
 
     // Handle paste from clipboard
     const handlePaste = useCallback(

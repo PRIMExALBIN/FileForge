@@ -138,5 +138,5 @@ export async function convertAudio(
         opus: 'audio/opus',
     };
 
-    return new Blob([data], { type: mimeTypes[format] || 'audio/mpeg' });
+    return new Blob([data as any], { type: mimeTypes[format] || 'audio/mpeg' });
 }

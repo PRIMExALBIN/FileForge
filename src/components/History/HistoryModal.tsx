@@ -16,13 +16,24 @@ interface HistoryModalProps {
     onClose: () => void;
 }
 
+interface HistoryItem {
+    id: string;
+    inputName: string;
+    inputFormat: string;
+    outputFormat: string;
+    timestamp: number;
+    fileSize: number;
+    success: boolean;
+    error?: string;
+}
+
 export function HistoryModal({ isOpen, onClose }: HistoryModalProps) {
-    const [history, setHistory] = useState<unknown[]>([]);
+    const [history, setHistory] = useState<HistoryItem[]>([]);
 
     useEffect(() => {
         if (isOpen) {
             (async () => {
-                const items = await getHistory();
+                const items = (await getHistory()) as HistoryItem[];
                 setHistory(items.sort((a, b) => b.timestamp - a.timestamp));
             })();
         }
@@ -56,7 +67,7 @@ export function HistoryModal({ isOpen, onClose }: HistoryModalProps) {
                             <p>No clean history yet.</p>
                         </div>
                     ) : (
-                        history.map((item) => (
+                        history.map((item: any) => (
                             <div key={item.id} className="p-3 bg-muted/30 rounded-lg border flex items-center justify-between">
                                 <div className="space-y-1 overflow-hidden">
                                     <p className="font-medium truncate text-sm" title={item.inputName}>

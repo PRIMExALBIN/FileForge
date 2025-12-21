@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Label, Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -6,29 +5,31 @@ import type { ConversionOptions } from '@/types';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface OptionsPanelProps {
-    outputFormat: string;
+    outputFormat?: string;
     options: ConversionOptions;
     onChange: (options: ConversionOptions) => void;
 }
 
 export function OptionsPanel({
-    outputFormat,
+    outputFormat = '',
     options,
     onChange,
 }: OptionsPanelProps) {
+    const out = (outputFormat || '').toLowerCase();
+
     const isImageFormat = ['jpg', 'jpeg', 'png', 'webp', 'gif', 'bmp', 'heic', 'ico'].includes(
-        outputFormat.toLowerCase()
+        out
     );
     const isAudioFormat = ['mp3', 'wav', 'ogg', 'aac', 'm4a', 'flac', 'opus', 'wma', 'aiff'].includes(
-        outputFormat.toLowerCase()
+        out
     );
     const isVideoFormat = ['mp4', 'webm', 'avi', 'mkv', 'mov'].includes(
-        outputFormat.toLowerCase()
+        out
     );
 
-    const supportsQuality = ['jpg', 'jpeg', 'webp'].includes(outputFormat.toLowerCase());
-    const needsBackground = ['jpg', 'jpeg', 'bmp'].includes(outputFormat.toLowerCase());
-    const isGif = outputFormat.toLowerCase() === 'gif';
+    const supportsQuality = ['jpg', 'jpeg', 'webp'].includes(out);
+    const needsBackground = ['jpg', 'jpeg', 'bmp'].includes(out);
+    const isGif = out === 'gif';
 
     if (!isImageFormat && !isAudioFormat && !isVideoFormat && !isGif) {
         return null;

@@ -28,7 +28,7 @@ export function Preview({ isOpen, onClose, file, format, filename }: PreviewProp
         if (imageFormats.includes(format.toLowerCase())) {
             return <ImagePreview blob={file} filename={filename} />;
         } else if (textFormats.includes(format.toLowerCase())) {
-            return <TextPreview blob={file} format={format} />;
+            return <TextPreview blob={file} />;
         } else if (dataFormats.includes(format.toLowerCase())) {
             return <DataPreview blob={file} format={format} />;
         } else if (audioFormats.includes(format.toLowerCase())) {

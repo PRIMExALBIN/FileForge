@@ -22,7 +22,7 @@ export async function createZip(
                 reject(err);
             } else {
                 if (onProgress) onProgress(100);
-                resolve(new Blob([data], { type: 'application/zip' }));
+                resolve(new Blob([data as any], { type: 'application/zip' }));
             }
         });
     });
@@ -45,7 +45,7 @@ export async function extractZip(
             } else {
                         const files = Object.entries(data).map(([name, content]) => ({
                             name,
-                            blob: new Blob([content as Uint8Array]),
+                            blob: new Blob([content as any]),
                         }));
                 if (onProgress) onProgress(100);
                 resolve(files);
