@@ -3,11 +3,12 @@ FROM node:20-slim AS builder
 
 WORKDIR /app
 
-# Copy package files
-COPY package.json package-lock.json ./
 
-# Use 'install' instead of 'ci' to force resolution of Linux native bindings
-RUN npm install --legacy-peer-deps
+# Copy package.json only (ignore lockfile for build to fix native deps)
+COPY package.json ./
+
+# Delete lockfile to force Linux native binary resolution
+RUN rm -f package-lock.json && npm install --legacy-peer-deps
 
 # Copy source
 COPY . .
