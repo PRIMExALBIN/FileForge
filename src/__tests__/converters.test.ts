@@ -7,8 +7,10 @@ describe('converters', () => {
   });
 
   it('exports convertFile as a function', () => {
-    // Import relatively to avoid path mapping complexity
-    const converters = require('../converters');
-    expect(typeof converters.convertFile).toBe('function');
+    // Import using ES module syntax
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    import('../converters').then(converters => {
+      expect(typeof converters.convertFile).toBe('function');
+    });
   });
 });

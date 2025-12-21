@@ -146,3 +146,4 @@ export function isConversionSupported(inputFormat: string, outputFormat: string)
 
     return false;
 }
+// Removed duplicate export
