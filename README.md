@@ -1,6 +1,6 @@
 <div align="center">
 
-![PLACEHOLDER: project logo](./public/logo.png)
+![PLACEHOLDER: project logo](./public/pwa-512x512.png)
 
 # FileForge 🔄
 
