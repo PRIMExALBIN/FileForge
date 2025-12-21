@@ -71,7 +71,7 @@ export async function imagesToPDF(
  */
 export async function pdfToImages(
     file: File,
-    outputFormat: string = 'png',
+    outputFormat = 'png',
     options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
