@@ -1,22 +1,33 @@
-import { useState, useEffect } from 'react';
-import { FileDropzone } from '@/components/FileDropzone/FileDropzone';
-import { FormatSelector } from '@/components/FormatSelector/FormatSelector';
-import { OptionsPanel } from '@/components/OptionsPanel/OptionsPanel';
-import { ConversionQueue } from '@/components/ConversionQueue/ConversionQueue';
-import { useTheme } from '@/hooks/useTheme';
-import { useConversion } from '@/hooks/useConversion';
+import { useState, useEffect } from "react";
+import { FileDropzone } from "@/components/FileDropzone/FileDropzone";
+import { FormatSelector } from "@/components/FormatSelector/FormatSelector";
+import { OptionsPanel } from "@/components/OptionsPanel/OptionsPanel";
+import { ConversionQueue } from "@/components/ConversionQueue/ConversionQueue";
+import { useTheme } from "@/hooks/useTheme";
+import { useConversion } from "@/hooks/useConversion";
 
-import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
-import { Moon, Sun, Monitor, Zap, Settings, HelpCircle, History } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { QUICK_CONVERT_SUGGESTIONS, getSuggestedFormats } from '@/utils/formatDetector';
-import type { ConversionOptions } from '@/types';
-import { HistoryModal } from '@/components/History/HistoryModal';
-import { SettingsModal } from '@/components/Settings/SettingsModal';
-import { HelpModal } from '@/components/Help/HelpModal';
-import './index.css';
+import { useKeyboardShortcuts } from "@/hooks/useKeyboardShortcuts";
+import {
+  Moon,
+  Sun,
+  Monitor,
+  Zap,
+  Settings,
+  HelpCircle,
+  History,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  QUICK_CONVERT_SUGGESTIONS,
+  getSuggestedFormats,
+} from "@/utils/formatDetector";
+import type { ConversionOptions } from "@/types";
+import { HistoryModal } from "@/components/History/HistoryModal";
+import { SettingsModal } from "@/components/Settings/SettingsModal";
+import { HelpModal } from "@/components/Help/HelpModal";
+import "./index.css";
 
 interface PendingFile {
   file: File;
@@ -42,21 +53,21 @@ function App() {
     const openSettings = () => setIsSettingsOpen(true);
     const openHelp = () => setIsHelpOpen(true);
 
-    document.addEventListener('open-settings', openSettings);
-    document.addEventListener('open-help', openHelp);
+    document.addEventListener("open-settings", openSettings);
+    document.addEventListener("open-help", openHelp);
 
     return () => {
-      document.removeEventListener('open-settings', openSettings);
-      document.removeEventListener('open-help', openHelp);
+      document.removeEventListener("open-settings", openSettings);
+      document.removeEventListener("open-help", openHelp);
     };
   }, []);
 
   const [pendingFiles, setPendingFiles] = useState<PendingFile[]>([]);
-  const [globalOutputFormat, setGlobalOutputFormat] = useState<string>('');
+  const [globalOutputFormat, setGlobalOutputFormat] = useState<string>("");
   const [globalOptions, setGlobalOptions] = useState<ConversionOptions>({
     quality: 85,
     maintainAspectRatio: true,
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
   });
 
   const handleFilesAdded = (files: Array<{ file: File; format: string }>) => {
@@ -64,7 +75,7 @@ function App() {
       // Auto-suggest output format
       const suggested = QUICK_CONVERT_SUGGESTIONS[item.format.toLowerCase()];
       const compatibleFormats = getSuggestedFormats(item.format);
-      const defaultOutput = suggested || compatibleFormats[0] || 'png';
+      const defaultOutput = suggested || compatibleFormats[0] || "png";
 
       return {
         file: item.file,
@@ -78,7 +89,7 @@ function App() {
 
     // Set global output format to first file's suggestion
     if (!globalOutputFormat && newPending.length > 0) {
-      setGlobalOutputFormat(newPending[0].outputFormat || '');
+      setGlobalOutputFormat(newPending[0].outputFormat || "");
     }
   };
 
@@ -96,19 +107,17 @@ function App() {
     setPendingFiles([]); // Clear pending after starting conversions
   };
 
-
-
   const cycleTheme = () => {
-    if (theme === 'light') setTheme('dark');
-    else if (theme === 'dark') setTheme('system');
-    else setTheme('light');
+    if (theme === "light") setTheme("dark");
+    else if (theme === "dark") setTheme("system");
+    else setTheme("light");
   };
 
   const getThemeIcon = () => {
     switch (theme) {
-      case 'light':
+      case "light":
         return <Sun className="w-4 h-4" />;
-      case 'dark':
+      case "dark":
         return <Moon className="w-4 h-4" />;
       default:
         return <Monitor className="w-4 h-4" />;
@@ -128,22 +137,44 @@ function App() {
               <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                 FileForge
               </h1>
-              <p className="text-xs text-muted-foreground">Universal File Converter</p>
+              <p className="text-xs text-muted-foreground">
+                Universal File Converter
+              </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="icon" onClick={() => setIsHistoryOpen(true)} title="History">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsHistoryOpen(true)}
+              title="History"
+            >
               <History className="w-4 h-4" />
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => setIsSettingsOpen(true)} title="Settings (Ctrl+,)">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsSettingsOpen(true)}
+              title="Settings (Ctrl+,)"
+            >
               <Settings className="w-4 h-4" />
             </Button>
-            <Button variant="ghost" size="icon" onClick={() => setIsHelpOpen(true)} title="Help (?)">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsHelpOpen(true)}
+              title="Help (?)"
+            >
               <HelpCircle className="w-4 h-4" />
             </Button>
             <div className="w-px h-6 bg-border mx-1"></div>
-            <Button variant="ghost" size="icon" onClick={cycleTheme} title="Toggle theme">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={cycleTheme}
+              title="Toggle theme"
+            >
               {getThemeIcon()}
             </Button>
           </div>
@@ -159,7 +190,8 @@ function App() {
               Convert Any File Format
             </h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Fast, secure, and private. All conversions happen in your browser—no uploads required.
+              Fast, secure, and private. All conversions happen in your
+              browser—no uploads required.
             </p>
           </div>
 
@@ -170,8 +202,13 @@ function App() {
           {pendingFiles.length > 0 && (
             <Card className="p-6">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold">Ready to Convert ({pendingFiles.length})</h3>
-                <Badge variant="secondary">{pendingFiles.length} file{pendingFiles.length !== 1 ? 's' : ''}</Badge>
+                <h3 className="text-lg font-semibold">
+                  Ready to Convert ({pendingFiles.length})
+                </h3>
+                <Badge variant="secondary">
+                  {pendingFiles.length} file
+                  {pendingFiles.length !== 1 ? "s" : ""}
+                </Badge>
               </div>
 
               <div className="space-y-4">
@@ -184,15 +221,20 @@ function App() {
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Output Format</label>
+                      <label className="text-sm font-medium mb-2 block">
+                        Output Format
+                      </label>
                       <FormatSelector
-                        inputFormat={pendingFiles[0]?.format || 'png'}
+                        inputFormat={pendingFiles[0]?.format || "png"}
                         value={globalOutputFormat}
                         onValueChange={(format) => {
                           setGlobalOutputFormat(format);
                           // Apply to all pending files
                           setPendingFiles((prev) =>
-                            prev.map((item) => ({ ...item, outputFormat: format }))
+                            prev.map((item) => ({
+                              ...item,
+                              outputFormat: format,
+                            })),
                           );
                         }}
                       />
@@ -205,7 +247,7 @@ function App() {
                       setGlobalOptions(opts);
                       // Apply to all pending files
                       setPendingFiles((prev) =>
-                        prev.map((item) => ({ ...item, options: opts }))
+                        prev.map((item) => ({ ...item, options: opts })),
                       );
                     }}
                   />
@@ -226,7 +268,7 @@ function App() {
                           </Badge>
                           <span>→</span>
                           <Badge variant="outline" className="text-xs">
-                            {item.outputFormat?.toUpperCase() || '?'}
+                            {item.outputFormat?.toUpperCase() || "?"}
                           </Badge>
                         </div>
                       </div>
@@ -234,7 +276,9 @@ function App() {
                         size="sm"
                         variant="ghost"
                         onClick={() => {
-                          setPendingFiles((prev) => prev.filter((_, i) => i !== index));
+                          setPendingFiles((prev) =>
+                            prev.filter((_, i) => i !== index),
+                          );
                         }}
                       >
                         ✕
@@ -295,13 +339,21 @@ function App() {
       {/* Footer */}
       <footer className="border-t border-border/40 mt-16 py-8">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          <p>Built with React + TypeScript • Powered by open-source libraries</p>
+          <p>
+            Built with React + TypeScript • Powered by open-source libraries
+          </p>
         </div>
       </footer>
 
       {/* Modals */}
-      <HistoryModal isOpen={isHistoryOpen} onClose={() => setIsHistoryOpen(false)} />
-      <SettingsModal isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
+      <HistoryModal
+        isOpen={isHistoryOpen}
+        onClose={() => setIsHistoryOpen(false)}
+      />
+      <SettingsModal
+        isOpen={isSettingsOpen}
+        onClose={() => setIsSettingsOpen(false)}
+      />
       <HelpModal isOpen={isHelpOpen} onClose={() => setIsHelpOpen(false)} />
     </div>
   );

@@ -1,24 +1,24 @@
-import mammoth from 'mammoth';
-import type { ConversionOptions } from '@/types';
+import mammoth from "mammoth";
+import type { ConversionOptions } from "@/types";
 
 /**
  * Convert DOCX to HTML
  */
 export async function docxToHTML(
-    file: File,
-    _options: ConversionOptions = {},
-    onProgress?: (progress: number) => void
+  file: File,
+  _options: ConversionOptions = {},
+  onProgress?: (progress: number) => void,
 ): Promise<Blob> {
-    void _options;
-    onProgress?.(20);
+  void _options;
+  onProgress?.(20);
 
-    const arrayBuffer = await file.arrayBuffer();
-    onProgress?.(50);
+  const arrayBuffer = await file.arrayBuffer();
+  onProgress?.(50);
 
-    const result = await mammoth.convertToHtml({ arrayBuffer });
-    onProgress?.(80);
+  const result = await mammoth.convertToHtml({ arrayBuffer });
+  onProgress?.(80);
 
-    const html = `
+  const html = `
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,30 +40,30 @@ export async function docxToHTML(
 </body>
 </html>`;
 
-    onProgress?.(100);
+  onProgress?.(100);
 
-    return new Blob([html], { type: 'text/html' });
+  return new Blob([html], { type: "text/html" });
 }
 
 /**
  * Convert DOCX to plain text
  */
 export async function docxToText(
-    file: File,
-    _options: ConversionOptions = {},
-    onProgress?: (progress: number) => void
+  file: File,
+  _options: ConversionOptions = {},
+  onProgress?: (progress: number) => void,
 ): Promise<Blob> {
-    void _options;
-    onProgress?.(20);
+  void _options;
+  onProgress?.(20);
 
-    const arrayBuffer = await file.arrayBuffer();
-    onProgress?.(50);
+  const arrayBuffer = await file.arrayBuffer();
+  onProgress?.(50);
 
-    const result = await mammoth.extractRawText({ arrayBuffer });
-    onProgress?.(80);
+  const result = await mammoth.extractRawText({ arrayBuffer });
+  onProgress?.(80);
 
-    const text = result.value;
-    onProgress?.(100);
+  const text = result.value;
+  onProgress?.(100);
 
-    return new Blob([text], { type: 'text/plain' });
+  return new Blob([text], { type: "text/plain" });
 }

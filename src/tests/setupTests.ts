@@ -1,5 +1,5 @@
-import '@testing-library/jest-dom';
-import { vi } from 'vitest';
+import "@testing-library/jest-dom";
+import { vi } from "vitest";
 
 // Mock Canvas
 HTMLCanvasElement.prototype.getContext = vi.fn(() => {
@@ -34,7 +34,7 @@ HTMLCanvasElement.prototype.getContext = vi.fn(() => {
   } as unknown as CanvasRenderingContext2D;
 });
 
-HTMLCanvasElement.prototype.toDataURL = vi.fn(() => 'data:image/png;base64,');
+HTMLCanvasElement.prototype.toDataURL = vi.fn(() => "data:image/png;base64,");
 
 // Mock Worker
 class MockWorker {
@@ -55,7 +55,7 @@ class MockWorker {
 }
 
 window.Worker = MockWorker as unknown as typeof Worker;
-window.URL.createObjectURL = vi.fn(() => 'mock-url');
+window.URL.createObjectURL = vi.fn(() => "mock-url");
 window.URL.revokeObjectURL = vi.fn();
 
 // Mock DOMMatrix for pdfjs-dist
@@ -83,7 +83,7 @@ class MockDOMMatrix {
     return this;
   }
   toString() {
-    return '[object DOMMatrix]';
+    return "[object DOMMatrix]";
   }
 }
 window.DOMMatrix = MockDOMMatrix as unknown as typeof DOMMatrix;
