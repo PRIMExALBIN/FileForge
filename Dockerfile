@@ -21,9 +21,6 @@ FROM nginx:alpine
 # Copy built assets
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Copy nginx config (optional)
-COPY nginx.conf /etc/nginx/nginx.conf 2>/dev/null || true
-
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
