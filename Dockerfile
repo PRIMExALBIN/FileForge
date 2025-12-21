@@ -10,8 +10,12 @@ COPY package.json ./
 # Delete lockfile to force Linux native binary resolution
 RUN rm -f package-lock.json && npm install --legacy-peer-deps
 
+
 # Copy source
 COPY . .
+
+# Remove test folders before build
+RUN rm -rf src/tests src/__tests__
 
 # Build
 RUN npm run build
