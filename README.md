@@ -20,7 +20,8 @@
 
 <!-- Row 2: CI / Versions (placeholders) -->
 [![Build](https://img.shields.io/github/actions/workflow/status/PRIMExALBIN/FileForge/ci.yml?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/PRIMExALBIN/FileForge/actions/workflows/ci.yml)
-[![Coverage](https://img.shields.io/badge/coverage-—-lightgrey?style=for-the-badge)](#)
+[![Coverage](https://img.shields.io/codecov/c/github/PRIMExALBIN/FileForge?style=for-the-badge)](https://codecov.io/gh/PRIMExALBIN/FileForge)
+[![Docker Image](https://img.shields.io/badge/Docker%20Image-ghcr.io%2FPRIMExALBIN%2Ffileforge-blue?style=for-the-badge&logo=docker)](https://github.com/PRIMExALBIN/FileForge/pkgs/container/fileforge)
 [![Version](https://img.shields.io/badge/version-0.0.0-blue?style=for-the-badge)](#)
 [![Downloads](https://img.shields.io/badge/downloads-—-lightgrey?style=for-the-badge)](#)
 
@@ -170,9 +171,16 @@ pnpm dev
 <details>
 <summary>Docker (build & serve)</summary>
 
-```yaml
-# [PLACEHOLDER: Dockerfile example if you want a containerized build]
+```bash
+# Build and run with Docker (production image)
+docker build -t ghcr.io/PRIMExALBIN/fileforge:latest .
+docker run -p 8080:80 ghcr.io/PRIMExALBIN/fileforge:latest
+
+# Pull from GitHub Container Registry
+# docker pull ghcr.io/PRIMExALBIN/fileforge:latest
 ```
+
+This repository also includes a GitHub Actions workflow to publish images to GitHub Container Registry (GHCR) on pushes to `main`.
 
 </details>
 
