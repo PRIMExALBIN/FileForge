@@ -20,7 +20,7 @@ export function downloadFile(blob: Blob, filename: string): void {
  */
 export async function downloadFilesAsZip(
     files: Array<{ blob: Blob; filename: string }>,
-    zipFilename: string = 'converted-files.zip'
+    zipFilename = 'converted-files.zip'
 ): Promise<void> {
     const zip = new JSZip();
 
