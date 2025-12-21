@@ -6,8 +6,8 @@ WORKDIR /app
 # Copy package files
 COPY package.json package-lock.json ./
 
-# Install dependencies (no need for manual native builds usually)
-RUN npm ci --legacy-peer-deps
+# Use 'install' instead of 'ci' to force resolution of Linux native bindings
+RUN npm install --legacy-peer-deps
 
 # Copy source
 COPY . .
