@@ -32,8 +32,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/PRIMExALBIN/fileforge:latest
-            ghcr.io/PRIMExALBIN/fileforge:${{ github.sha }}
+            ghcr.io/primexalbin/fileforge:latest
+            ghcr.io/primexalbin/fileforge:${{ github.sha }}
           platforms: linux/amd64,linux/arm64
           cache-from: type=gha
           cache-to: type=gha,mode=max

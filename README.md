@@ -12,16 +12,16 @@
 <div align="center">
 
 <!-- Row 1: repo badges -->
-[![Stars](https://img.shields.io/github/stars/PRIMExALBIN/FileForge?style=for-the-badge)](https://github.com/PRIMExALBIN/FileForge/stargazers)
-[![Forks](https://img.shields.io/github/forks/PRIMExALBIN/FileForge?style=for-the-badge)](https://github.com/PRIMExALBIN/FileForge/network/members)
-[![Issues](https://img.shields.io/github/issues/PRIMExALBIN/FileForge?style=for-the-badge)](https://github.com/PRIMExALBIN/FileForge/issues)
-[![License](https://img.shields.io/github/license/PRIMExALBIN/FileForge?style=for-the-badge)](LICENSE)
-[![Contributors](https://img.shields.io/github/contributors/PRIMExALBIN/FileForge?style=for-the-badge)](https://github.com/PRIMExALBIN/FileForge/graphs/contributors)
+[![Stars](https://img.shields.io/github/stars/primexalbin/fileforge?style=for-the-badge)](https://github.com/primexalbin/fileforge/stargazers)
+[![Forks](https://img.shields.io/github/forks/primexalbin/fileforge?style=for-the-badge)](https://github.com/primexalbin/fileforge/network/members)
+[![Issues](https://img.shields.io/github/issues/primexalbin/fileforge?style=for-the-badge)](https://github.com/primexalbin/fileforge/issues)
+[![License](https://img.shields.io/github/license/primexalbin/fileforge?style=for-the-badge)](LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/primexalbin/fileforge?style=for-the-badge)](https://github.com/primexalbin/fileforge/graphs/contributors)
 
 <!-- Row 2: CI / Versions (placeholders) -->
-[![Build](https://img.shields.io/github/actions/workflow/status/PRIMExALBIN/FileForge/ci.yml?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/PRIMExALBIN/FileForge/actions/workflows/ci.yml)
-[![Coverage](https://img.shields.io/codecov/c/github/PRIMExALBIN/FileForge?style=for-the-badge)](https://codecov.io/gh/PRIMExALBIN/FileForge)
-[![Docker Image](https://img.shields.io/badge/Docker%20Image-ghcr.io%2FPRIMExALBIN%2Ffileforge-blue?style=for-the-badge&logo=docker)](https://github.com/PRIMExALBIN/FileForge/pkgs/container/fileforge)
+[![Build](https://img.shields.io/github/actions/workflow/status/primexalbin/fileforge/ci.yml?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/primexalbin/fileforge/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/codecov/c/github/primexalbin/fileforge?style=for-the-badge)](https://codecov.io/gh/primexalbin/fileforge)
+[![Docker Image](https://img.shields.io/badge/Docker%20Image-ghcr.io%2Fprimexalbin%2Ffileforge-blue?style=for-the-badge&logo=docker)](https://github.com/primexalbin/fileforge/pkgs/container/fileforge)
 [![Version](https://img.shields.io/badge/version-0.0.0-blue?style=for-the-badge)](#)
 [![Downloads](https://img.shields.io/badge/downloads-—-lightgrey?style=for-the-badge)](#)
 
@@ -35,7 +35,7 @@
 
 ---
 
-🔗 Quick links: [Documentation](#architecture) • [Report Bug](https://github.com/PRIMExALBIN/FileForge/issues/new?template=bug.md) • [Request Feature](https://github.com/PRIMExALBIN/FileForge/issues/new?template=feature.md)
+🔗 Quick links: [Documentation](#architecture) • [Report Bug](https://github.com/primexalbin/fileforge/issues/new?template=bug.md) • [Request Feature](https://github.com/primexalbin/fileforge/issues/new?template=feature.md)
 
 </div>
 
@@ -173,11 +173,11 @@ pnpm dev
 
 ```bash
 # Build and run with Docker (production image)
-docker build -t ghcr.io/PRIMExALBIN/fileforge:latest .
-docker run -p 8080:80 ghcr.io/PRIMExALBIN/fileforge:latest
+docker build -t ghcr.io/primexalbin/fileforge:latest .
+docker run -p 8080:80 ghcr.io/primexalbin/fileforge:latest
 
 # Pull from GitHub Container Registry
-# docker pull ghcr.io/PRIMExALBIN/fileforge:latest
+# docker pull ghcr.io/primexalbin/fileforge:latest
 ```
 
 This repository also includes a GitHub Actions workflow to publish images to GitHub Container Registry (GHCR) on pushes to `main`.
@@ -371,9 +371,9 @@ Commit conventions (recommendation):
 | style | Formatting, missing semicolons, etc. |
 | refactor | Code change that neither fixes a bug nor adds a feature |
 
-Contributors image (PRIMExALBIN/FileForge):
+Contributors image (primexalbin/fileforge):
 
-![Contributors](https://contrib.rocks/image?repo=PRIMExALBIN/FileForge)
+![Contributors](https://contrib.rocks/image?repo=primexalbin/fileforge)
 
 ---
 
