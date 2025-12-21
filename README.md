@@ -12,6 +12,7 @@
 <div align="center">
 
 <!-- Row 1: repo badges -->
+
 [![Stars](https://img.shields.io/github/stars/primexalbin/fileforge?style=for-the-badge)](https://github.com/primexalbin/fileforge/stargazers)
 [![Forks](https://img.shields.io/github/forks/primexalbin/fileforge?style=for-the-badge)](https://github.com/primexalbin/fileforge/network/members)
 [![Issues](https://img.shields.io/github/issues/primexalbin/fileforge?style=for-the-badge)](https://github.com/primexalbin/fileforge/issues)
@@ -19,6 +20,7 @@
 [![Contributors](https://img.shields.io/github/contributors/primexalbin/fileforge?style=for-the-badge)](https://github.com/primexalbin/fileforge/graphs/contributors)
 
 <!-- Row 2: CI / Versions (placeholders) -->
+
 [![Build](https://img.shields.io/github/actions/workflow/status/primexalbin/fileforge/ci.yml?style=for-the-badge&logo=github-actions&logoColor=white)](https://github.com/primexalbin/fileforge/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/codecov/c/github/primexalbin/fileforge?style=for-the-badge)](https://codecov.io/gh/primexalbin/fileforge)
 [![Docker Image](https://img.shields.io/badge/Docker%20Image-ghcr.io%2Fprimexalbin%2Ffileforge-blue?style=for-the-badge&logo=docker)](https://github.com/primexalbin/fileforge/pkgs/container/fileforge)
@@ -26,6 +28,7 @@
 [![Downloads](https://img.shields.io/badge/downloads-—-lightgrey?style=for-the-badge)](#)
 
 <!-- Row 3: Tech stack badges (detected) -->
+
 [![React](https://img.shields.io/badge/React-✨-blue?style=for-the-badge)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-^5.9-blue?style=for-the-badge)](https://www.typescriptlang.org)
 [![Vite](https://img.shields.io/badge/Vite-^7.2.4-blue?style=for-the-badge)](https://vitejs.dev/)
@@ -49,8 +52,8 @@
   <details>
     <summary>More Screenshots</summary>
 
-| Upload / Dropzone | Conversion Queue | Settings |
-| --- | --- | --- |
+| Upload / Dropzone                                      | Conversion Queue                                       | Settings                                               |
+| ------------------------------------------------------ | ------------------------------------------------------ | ------------------------------------------------------ |
 | ![screenshot-1](./public/screenshots/screenshot-1.png) | ![screenshot-2](./public/screenshots/screenshot-2.png) | ![screenshot-3](./public/screenshots/screenshot-3.png) |
 
   </details>
@@ -86,13 +89,13 @@
 
 <div align="center">
 
-| Core Features | Developer Experience |
-| --- | --- |
+| Core Features                                                                      | Developer Experience                           |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------- |
 | ✅ Convert images, documents, audio, video, spreadsheets & archives (200+ formats) | ✅ TypeScript-first, small, modular converters |
-| ✅ In-browser conversions (no uploads) 🔒 | ✅ Vite + Hot Module Replacement |
-| ✅ FFmpeg (browser) for audio/video conversions 🎛️ | ✅ Friendly hooks: `useConversion`, `useTheme` |
-| ✅ Batch conversions & queue management ⚡ | ✅ Clean stores with Zustand |
-| ✅ Format detection via magic bytes & MIME types 🔍 | ✅ Small, well-typed utilities & helpers |
+| ✅ In-browser conversions (no uploads) 🔒                                          | ✅ Vite + Hot Module Replacement               |
+| ✅ FFmpeg (browser) for audio/video conversions 🎛️                                 | ✅ Friendly hooks: `useConversion`, `useTheme` |
+| ✅ Batch conversions & queue management ⚡                                         | ✅ Clean stores with Zustand                   |
+| ✅ Format detection via magic bytes & MIME types 🔍                                | ✅ Small, well-typed utilities & helpers       |
 
 </div>
 
@@ -111,10 +114,10 @@
 
 ## Why this project ✨
 
-| Before | After |
-| --- | --- |
-| Upload large files to server (slow, private) | Convert locally in browser (fast & private) |
-| Complex multi-service pipelines | Single, modular web app with pluggable converters |
+| Before                                       | After                                             |
+| -------------------------------------------- | ------------------------------------------------- |
+| Upload large files to server (slow, private) | Convert locally in browser (fast & private)       |
+| Complex multi-service pipelines              | Single, modular web app with pluggable converters |
 
 ---
 
@@ -135,10 +138,10 @@ Or open with Visual Studio Code and press F5 (Vite + React plugin). The app name
 
 ### Prerequisites
 
-| Tool | Minimum Version | Notes |
-| --- | ---: | --- |
-| Node.js | 18+ | Recommended LTS |
-| npm | 9+ | package-lock.json detected |
+| Tool    |              Minimum Version | Notes                                |
+| ------- | ---------------------------: | ------------------------------------ |
+| Node.js |                          18+ | Recommended LTS                      |
+| npm     |                           9+ | package-lock.json detected           |
 | Browser | Latest Chrome/Firefox/Safari | Required for modern browser features |
 
 <details>
@@ -199,14 +202,17 @@ This repository also includes a GitHub Actions workflow to publish images to Git
 You can use the converters programmatically (useful for embedding in other apps):
 
 ```ts
-import { convertFile, isConversionSupported } from '@/converters';
+import { convertFile, isConversionSupported } from "@/converters";
 
-const blob = await convertFile(file, 'png', 'jpg', { quality: 85 }, (p) => console.log('progress', p));
+const blob = await convertFile(file, "png", "jpg", { quality: 85 }, (p) =>
+  console.log("progress", p),
+);
 
-console.log('Supported?', isConversionSupported('png', 'jpg'));
+console.log("Supported?", isConversionSupported("png", "jpg"));
 ```
 
 Notes:
+
 - `convertFile` returns a `Blob` or `Blob[]` depending on output (e.g., PDF -> images returns multiple blobs).
 - `onProgress` is optional and receives percentage [0-100].
 
@@ -218,8 +224,8 @@ Notes:
 FFmpeg is loaded in-browser on demand (first use downloads ~31MB). You can monitor FFmpeg loading via `getFFmpeg(onProgress)` exported from `src/lib/ffmpeg.ts`.
 
 ```ts
-import { getFFmpeg } from '@/lib/ffmpeg';
-const ff = await getFFmpeg((msg)=>console.log(msg));
+import { getFFmpeg } from "@/lib/ffmpeg";
+const ff = await getFFmpeg((msg) => console.log(msg));
 ```
 
 </details>
@@ -261,22 +267,22 @@ src/
 
 ### convertFile(file, inputFormat, outputFormat, options?, onProgress?)
 
-| Parameter | Type | Required | Default | Description |
-| --- | --- | :---: | --- | --- |
-| file | File | ✓ | — | Input file to convert |
-| inputFormat | string | ✓ | — | Input extension (e.g., "png") |
-| outputFormat | string | ✓ | — | Desired output extension (e.g., "jpg") |
-| options | ConversionOptions | ✗ | {} | Format-specific options (quality, bitrate, etc.) |
-| onProgress | (p:number) => void | ✗ | — | Progress callback (percentage 0-100) |
+| Parameter    | Type               | Required | Default | Description                                      |
+| ------------ | ------------------ | :------: | ------- | ------------------------------------------------ |
+| file         | File               |    ✓     | —       | Input file to convert                            |
+| inputFormat  | string             |    ✓     | —       | Input extension (e.g., "png")                    |
+| outputFormat | string             |    ✓     | —       | Desired output extension (e.g., "jpg")           |
+| options      | ConversionOptions  |    ✗     | {}      | Format-specific options (quality, bitrate, etc.) |
+| onProgress   | (p:number) => void |    ✗     | —       | Progress callback (percentage 0-100)             |
 
 Returns: Promise<Blob | Blob[]>
 
 ### isConversionSupported(inputFormat, outputFormat)
 
-| Parameter | Type | Required | Description |
-| --- | --- | :---: | --- |
-| inputFormat | string | ✓ | Input extension |
-| outputFormat | string | ✓ | Output extension |
+| Parameter    | Type   | Required | Description      |
+| ------------ | ------ | :------: | ---------------- |
+| inputFormat  | string |    ✓     | Input extension  |
+| outputFormat | string |    ✓     | Output extension |
 
 Returns: boolean
 
@@ -324,10 +330,10 @@ Consider adding Jest or Vitest for unit testing and Playwright / Cypress for E2E
 
 ## Benchmarks (placeholder) 🧾
 
-| Operation | Median Time | Notes |
-| --- | ---: | --- |
-| PNG → JPG (2MB image) | ~200ms | Browser-based conversion using pica |
-| Video transcode (short clip) | ~5s | Uses FFmpeg WASM (first-load penalty applies) |
+| Operation                    | Median Time | Notes                                         |
+| ---------------------------- | ----------: | --------------------------------------------- |
+| PNG → JPG (2MB image)        |      ~200ms | Browser-based conversion using pica           |
+| Video transcode (short clip) |         ~5s | Uses FFmpeg WASM (first-load penalty applies) |
 
 ```
 ████████████▉  80%  PNG → JPG
@@ -363,12 +369,12 @@ We ❤️ contributions. Please open issues or PRs.
 
 Commit conventions (recommendation):
 
-| Type | Description |
-| --- | --- |
-| feat | A new feature |
-| fix | A bug fix |
-| docs | Documentation only changes |
-| style | Formatting, missing semicolons, etc. |
+| Type     | Description                                             |
+| -------- | ------------------------------------------------------- |
+| feat     | A new feature                                           |
+| fix      | A bug fix                                               |
+| docs     | Documentation only changes                              |
+| style    | Formatting, missing semicolons, etc.                    |
 | refactor | Code change that neither fixes a bug nor adds a feature |
 
 Contributors image (primexalbin/fileforge):
@@ -396,11 +402,11 @@ Gold / Silver / Bronze sponsorship placeholders — to be filled.
 
 ## Support 📬
 
-| Channel | Details |
-| --- | --- |
-| Issues | https://github.com/PRIMExALBIN/FileForge/issues |
+| Channel     | Details                                              |
+| ----------- | ---------------------------------------------------- |
+| Issues      | https://github.com/PRIMExALBIN/FileForge/issues      |
 | Discussions | https://github.com/PRIMExALBIN/FileForge/discussions |
-| Email | [PLACEHOLDER: maintainer@example.com] |
+| Email       | [PLACEHOLDER: maintainer@example.com]                |
 
 ---
 
@@ -411,29 +417,29 @@ This project is licensed under the MIT License — see the full license below an
 <details>
   <summary>MIT License (click to expand)</summary>
 
-  ```text
-  MIT License
+```text
+MIT License
 
-  Copyright (c) 2026 PRIMExALBIN
+Copyright (c) 2026 PRIMExALBIN
 
-  Permission is hereby granted, free of charge, to any person obtaining a copy
-  of this software and associated documentation files (the "Software"), to deal
-  in the Software without restriction, including without limitation the rights
-  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-  copies of the Software, and to permit persons to whom the Software is
-  furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-  The above copyright notice and this permission notice shall be included in all
-  copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-  SOFTWARE.
-  ```
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 </details>
 
@@ -459,12 +465,14 @@ This project is licensed under the MIT License — see the full license below an
 ![Star History](https://starchart.dev/PRIMExALBIN/FileForge.svg)
 
 [BUY ME A COFFEE](https://www.buymeacoffee.com/[PLACEHOLDER]) • Built with ❤️ by the community
+
 </div>
 
 [screenshot-1]: ./public/screenshots/screenshot-1.png
 [screenshot-2]: ./public/screenshots/screenshot-2.png
 [screenshot-3]: ./public/screenshots/screenshot-3.png
 [demo]: ./public/screenshots/demo.gif
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -484,9 +492,9 @@ If you are developing a production application, we recommend updating the config
 
 ```js
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(["dist"]),
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ["**/*.{ts,tsx}"],
     extends: [
       // Other configs...
 
@@ -501,40 +509,40 @@ export default defineConfig([
     ],
     languageOptions: {
       parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
         tsconfigRootDir: import.meta.dirname,
       },
       // other options...
     },
   },
-])
+]);
 ```
 
 You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
 ```js
 // eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+import reactX from "eslint-plugin-react-x";
+import reactDom from "eslint-plugin-react-dom";
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(["dist"]),
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ["**/*.{ts,tsx}"],
     extends: [
       // Other configs...
       // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
+      reactX.configs["recommended-typescript"],
       // Enable lint rules for React DOM
       reactDom.configs.recommended,
     ],
     languageOptions: {
       parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
         tsconfigRootDir: import.meta.dirname,
       },
       // other options...
     },
   },
-])
+]);
 ```
