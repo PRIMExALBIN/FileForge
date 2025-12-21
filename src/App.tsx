@@ -5,7 +5,7 @@ import { OptionsPanel } from '@/components/OptionsPanel/OptionsPanel';
 import { ConversionQueue } from '@/components/ConversionQueue/ConversionQueue';
 import { useTheme } from '@/hooks/useTheme';
 import { useConversion } from '@/hooks/useConversion';
-import { useSettingsStore } from '@/stores/settingsStore';
+
 import { useKeyboardShortcuts } from '@/hooks/useKeyboardShortcuts';
 import { Moon, Sun, Monitor, Zap, Settings, HelpCircle, History } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -27,8 +27,7 @@ interface PendingFile {
 
 function App() {
   const { theme, setTheme } = useTheme();
-  const { startConversion, startBatchConversion } = useConversion();
-  const { autoClearCompleted, autoClearDelay } = useSettingsStore();
+  const { startBatchConversion } = useConversion();
 
   // Modals state
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
@@ -97,11 +96,7 @@ function App() {
     setPendingFiles([]); // Clear pending after starting conversions
   };
 
-  const updatePendingFile = (index: number, updates: Partial<PendingFile>) => {
-    setPendingFiles((prev) =>
-      prev.map((item, i) => (i === index ? { ...item, ...updates } : item))
-    );
-  };
+
 
   const cycleTheme = () => {
     if (theme === 'light') setTheme('dark');

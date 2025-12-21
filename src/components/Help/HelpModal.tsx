@@ -7,8 +7,7 @@ import {
     DialogDescription,
 } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { FileIcon, Music, Video, Image as ImageIcon, Archive, Sheet, Code } from 'lucide-react';
+import { FileIcon, Music, Video, Image as ImageIcon, Archive, Sheet } from 'lucide-react';
 
 interface HelpModalProps {
     isOpen: boolean;

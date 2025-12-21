@@ -8,7 +8,6 @@ describe('converters', () => {
 
   it('exports convertFile as a function', () => {
     // Import using ES module syntax
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     import('../converters').then(converters => {
       expect(typeof converters.convertFile).toBe('function');
     });

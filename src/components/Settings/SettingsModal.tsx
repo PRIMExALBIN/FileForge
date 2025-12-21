@@ -9,8 +9,7 @@ import { Label } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { useSettingsStore } from '@/stores/settingsStore';
 import { useTheme } from '@/hooks/useTheme';
-import { Button } from '@/components/ui/button';
-import { Moon, Sun, Monitor, Trash2 } from 'lucide-react';
+import { Moon, Sun, Monitor } from 'lucide-react';
 
 interface SettingsModalProps {
     isOpen: boolean;

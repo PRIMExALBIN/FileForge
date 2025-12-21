@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
-import { useSettingsStore } from '@/stores/settingsStore';
-import { useConversionStore } from '@/stores/conversionStore';
 
 export function useKeyboardShortcuts() {
-    const { addJob } = useConversionStore();
     // We could trigger UI actions here or just providing focus shortcuts
 
     useEffect(() => {

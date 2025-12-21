@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { getHistory, clearHistory } from '@/lib/historyDB';
 import { formatFileSize } from '@/utils/fileUtils';
-import { Trash2, RefreshCw, Clock } from 'lucide-react';
+import { Trash2, Clock } from 'lucide-react';
 
 interface HistoryModalProps {
     isOpen: boolean;
@@ -17,18 +17,16 @@ interface HistoryModalProps {
 }
 
 export function HistoryModal({ isOpen, onClose }: HistoryModalProps) {
-    const [history, setHistory] = useState<any[]>([]);
+    const [history, setHistory] = useState<unknown[]>([]);
 
     useEffect(() => {
         if (isOpen) {
-            loadHistory();
+            (async () => {
+                const items = await getHistory();
+                setHistory(items.sort((a, b) => b.timestamp - a.timestamp));
+            })();
         }
     }, [isOpen]);
-
-    async function loadHistory() {
-        const items = await getHistory();
-        setHistory(items.sort((a, b) => b.timestamp - a.timestamp));
-    }
 
     async function handleClear() {
         if (confirm('Clear all history?')) {

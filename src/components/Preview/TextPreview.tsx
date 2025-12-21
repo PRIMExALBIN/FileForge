@@ -4,10 +4,9 @@ import { Button } from '@/components/ui/button';
 
 interface TextPreviewProps {
     blob: Blob;
-    format: string;
 }
 
-export function TextPreview({ blob, format }: TextPreviewProps) {
+export function TextPreview({ blob }: TextPreviewProps) {
     const [text, setText] = useState('');
     const [wordWrap, setWordWrap] = useState(true);
 

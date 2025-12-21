@@ -27,7 +27,7 @@ interface ConversionJobCardProps {
 }
 
 export function ConversionJobCard({ job }: ConversionJobCardProps) {
-    const { removeJob, updateJob } = useConversionStore();
+    const { removeJob } = useConversionStore();
     const [showPreview, setShowPreview] = useState(false);
 
     const handleDownload = () => {

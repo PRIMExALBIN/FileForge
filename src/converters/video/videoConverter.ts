@@ -161,5 +161,5 @@ export async function convertVideo(
         mp3: 'audio/mpeg',
     };
 
-    return new Blob([data as any], { type: mimeTypes[format] || 'video/mp4' });
+    return new Blob([data], { type: mimeTypes[format] || 'video/mp4' });
 }

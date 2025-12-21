@@ -6,9 +6,10 @@ import type { ConversionOptions } from '@/types';
  */
 export async function xlsxToCSV(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const arrayBuffer = await file.arrayBuffer();
@@ -24,7 +25,7 @@ export async function xlsxToCSV(
     const csv = XLSX.utils.sheet_to_csv(worksheet);
     onProgress?.(100);
 
-    return new Blob([csv as any], { type: 'text/csv' });
+    return new Blob([csv], { type: 'text/csv' });
 }
 
 /**
@@ -32,9 +33,10 @@ export async function xlsxToCSV(
  */
 export async function csvToXLSX(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const text = await file.text();
@@ -51,7 +53,7 @@ export async function csvToXLSX(
     const xlsxBuffer = XLSX.write(workbook, { type: 'array', bookType: 'xlsx' });
     onProgress?.(100);
 
-    return new Blob([xlsxBuffer as any], {
+    return new Blob([xlsxBuffer], {
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     });
 }
@@ -61,9 +63,10 @@ export async function csvToXLSX(
  */
 export async function xlsxToJSON(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const arrayBuffer = await file.arrayBuffer();
@@ -79,7 +82,7 @@ export async function xlsxToJSON(
     const jsonString = JSON.stringify(jsonData, null, 2);
     onProgress?.(100);
 
-    return new Blob([jsonString as any], { type: 'application/json' });
+    return new Blob([jsonString], { type: 'application/json' });
 }
 
 /**
@@ -87,9 +90,10 @@ export async function xlsxToJSON(
  */
 export async function jsonToXLSX(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const text = await file.text();
@@ -108,7 +112,7 @@ export async function jsonToXLSX(
     const xlsxBuffer = XLSX.write(workbook, { type: 'array', bookType: 'xlsx' });
     onProgress?.(100);
 
-    return new Blob([xlsxBuffer as any], {
+    return new Blob([xlsxBuffer], {
         type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     });
 }
@@ -118,9 +122,10 @@ export async function jsonToXLSX(
  */
 export async function csvToJSON(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const text = await file.text();
@@ -135,7 +140,7 @@ export async function csvToJSON(
     const jsonString = JSON.stringify(jsonData, null, 2);
     onProgress?.(100);
 
-    return new Blob([jsonString as any], { type: 'application/json' });
+    return new Blob([jsonString], { type: 'application/json' });
 }
 
 /**
@@ -143,9 +148,10 @@ export async function csvToJSON(
  */
 export async function jsonToCSV(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const text = await file.text();
@@ -161,5 +167,5 @@ export async function jsonToCSV(
     const csv = XLSX.utils.sheet_to_csv(worksheet);
     onProgress?.(100);
 
-    return new Blob([csv as any], { type: 'text/csv' });
+    return new Blob([csv], { type: 'text/csv' });
 }

@@ -39,8 +39,8 @@ HTMLCanvasElement.prototype.toDataURL = vi.fn(() => 'data:image/png;base64,');
 // Mock Worker
 class MockWorker {
   url: string;
-  onmessage: (e: any) => void;
-  onerror: (e: any) => void;
+  onmessage: (e: MessageEvent | unknown) => void;
+  onerror: (e: ErrorEvent | unknown) => void;
 
   constructor(stringUrl: string) {
     this.url = stringUrl;
@@ -48,13 +48,13 @@ class MockWorker {
     this.onerror = () => {};
   }
 
-  postMessage(msg: any) {
+  postMessage() {
     // Simulate async response if needed, or just do nothing for now
   }
   terminate() {}
 }
 
-window.Worker = MockWorker as any;
+window.Worker = MockWorker as unknown as typeof Worker;
 window.URL.createObjectURL = vi.fn(() => 'mock-url');
 window.URL.revokeObjectURL = vi.fn();
 
@@ -86,4 +86,4 @@ class MockDOMMatrix {
     return '[object DOMMatrix]';
   }
 }
-window.DOMMatrix = MockDOMMatrix as any;
+window.DOMMatrix = MockDOMMatrix as unknown as typeof DOMMatrix;

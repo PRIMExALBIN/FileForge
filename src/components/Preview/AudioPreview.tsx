@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useMemo, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import { downloadFile } from '@/utils/downloadUtils';
@@ -9,13 +9,11 @@ interface AudioPreviewProps {
 }
 
 export function AudioPreview({ blob, filename }: AudioPreviewProps) {
-    const [url, setUrl] = useState<string>('');
+    const url = useMemo(() => URL.createObjectURL(blob), [blob]);
 
     useEffect(() => {
-        const objectUrl = URL.createObjectURL(blob);
-        setUrl(objectUrl);
-        return () => URL.revokeObjectURL(objectUrl);
-    }, [blob]);
+        return () => URL.revokeObjectURL(url);
+    }, [url]);
 
     return (
         <div className="flex flex-col items-center justify-center p-8 gap-6 h-full bg-muted/20">

@@ -28,7 +28,7 @@ export function FileDropzone({ onFilesAdded, className }: FileDropzoneProps) {
             const droppedFiles = Array.from(e.dataTransfer.files);
             await processFiles(droppedFiles);
         },
-        [onFilesAdded]
+        [processFiles]
     );
 
     // Handle file selection via browse
@@ -42,11 +42,11 @@ export function FileDropzone({ onFilesAdded, className }: FileDropzoneProps) {
                 fileInputRef.current.value = '';
             }
         },
-        [onFilesAdded]
+        [processFiles]
     );
 
     // Process and validate files
-    const processFiles = async (files: File[]) => {
+    const processFiles = useCallback(async (files: File[]) => {
         const processedFiles: Array<{ file: File; format: string }> = [];
 
         for (const file of files) {
@@ -68,7 +68,7 @@ export function FileDropzone({ onFilesAdded, className }: FileDropzoneProps) {
         if (processedFiles.length > 0) {
             onFilesAdded(processedFiles);
         }
-    };
+    }, [onFilesAdded]);
 
     // Handle paste from clipboard
     const handlePaste = useCallback(
@@ -88,7 +88,7 @@ export function FileDropzone({ onFilesAdded, className }: FileDropzoneProps) {
                 await processFiles(files);
             }
         },
-        [onFilesAdded]
+        [processFiles]
     );
 
     // Handle URL import

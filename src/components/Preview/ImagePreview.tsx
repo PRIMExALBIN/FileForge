@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { ZoomIn, ZoomOut, Maximize2, Copy } from 'lucide-react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface ImagePreviewProps {
@@ -9,7 +9,7 @@ interface ImagePreviewProps {
 
 export function ImagePreview({ blob, filename }: ImagePreviewProps) {
     const [zoom, setZoom] = useState(100);
-    const [imageUrl, setImageUrl] = useState<string>('');
+    const imageUrl = useMemo(() => URL.createObjectURL(blob), [blob]);
     const [imageDimensions, setImageDimensions] = useState<{ width: number; height: number } | null>(null);
     const [pan, setPan] = useState({ x: 0, y: 0 });
     const [isDragging, setIsDragging] = useState(false);
@@ -17,18 +17,14 @@ export function ImagePreview({ blob, filename }: ImagePreviewProps) {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        const url = URL.createObjectURL(blob);
-        setImageUrl(url);
+        return () => URL.revokeObjectURL(imageUrl);
+    }, [imageUrl]);
 
-        // Get image dimensions
-        const img = new Image();
-        img.onload = () => {
-            setImageDimensions({ width: img.width, height: img.height });
-        };
-        img.src = url;
-
-        return () => URL.revokeObjectURL(url);
-    }, [blob]);
+    // Use img onLoad to set dimensions instead of synchronous effect
+    const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+        const target = e.currentTarget;
+        setImageDimensions({ width: target.naturalWidth, height: target.naturalHeight });
+    };
 
     const handleZoomIn = () => setZoom((prev) => Math.min(prev + 25, 400));
     const handleZoomOut = () => setZoom((prev) => Math.max(prev - 25, 25));
@@ -100,6 +96,7 @@ export function ImagePreview({ blob, filename }: ImagePreviewProps) {
                         src={imageUrl}
                         alt={filename}
                         draggable={false}
+                        onLoad={handleImageLoad}
                         style={{
                             transform: `scale(${zoom / 100}) translate(${pan.x}px, ${pan.y}px)`,
                             transformOrigin: 'center',

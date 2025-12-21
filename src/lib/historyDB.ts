@@ -32,7 +32,9 @@ export async function addToHistory(conversion: HistoryDB['conversions']['value']
 
 export async function getHistory(limit = 50) {
     const db = await dbPromise;
-    return db.getAllFromIndex('conversions', 'by-date');
+    const items = await db.getAllFromIndex('conversions', 'by-date');
+    // return newest first
+    return items.sort((a, b) => b.timestamp - a.timestamp).slice(0, limit);
 }
 
 export async function clearHistory() {

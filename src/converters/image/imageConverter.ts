@@ -1,5 +1,4 @@
 import heic2any from 'heic2any';
-import imageCompression from 'browser-image-compression';
 import Pica from 'pica';
 import type { ConversionOptions } from '@/types';
 

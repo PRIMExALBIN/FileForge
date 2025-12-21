@@ -6,14 +6,12 @@ import type { ConversionOptions } from '@/types';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface OptionsPanelProps {
-    inputFormat: string;
     outputFormat: string;
     options: ConversionOptions;
     onChange: (options: ConversionOptions) => void;
 }
 
 export function OptionsPanel({
-    inputFormat,
     outputFormat,
     options,
     onChange,

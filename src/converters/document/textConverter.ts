@@ -6,9 +6,10 @@ import type { ConversionOptions } from '@/types';
  */
 export async function markdownToHTML(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const text = await file.text();
@@ -74,9 +75,10 @@ export async function markdownToHTML(
  */
 export async function htmlToText(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const html = await file.text();
@@ -97,9 +99,10 @@ export async function htmlToText(
  */
 export async function textToHTML(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const text = await file.text();

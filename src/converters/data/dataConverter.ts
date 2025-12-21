@@ -8,9 +8,10 @@ import type { ConversionOptions } from '@/types';
  */
 export async function jsonToTOML(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const text = await file.text();
@@ -28,9 +29,10 @@ export async function jsonToTOML(
  */
 export async function tomlToJSON(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const text = await file.text();
@@ -49,9 +51,10 @@ export async function tomlToJSON(
  */
 export async function jsonToYAML(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const text = await file.text();
@@ -69,9 +72,10 @@ export async function jsonToYAML(
  */
 export async function yamlToJSON(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const text = await file.text();
@@ -89,9 +93,10 @@ export async function yamlToJSON(
  */
 export async function jsonToXML(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const text = await file.text();
@@ -114,9 +119,10 @@ export async function jsonToXML(
  */
 export async function xmlToJSON(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const text = await file.text();

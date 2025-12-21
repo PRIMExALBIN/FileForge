@@ -143,7 +143,7 @@ export function getFormatInfo(extension: string): FormatInfo | undefined {
  */
 export function getFormatsByCategory(category: FormatCategory): FormatInfo[] {
     return (Object.entries(FORMATS) as [string, FormatDefinition][])
-        .filter(([_, info]) => info.category === category)
+        .filter(([, info]) => info.category === category)
         .map(([ext, info]) => mapToFormatInfo(info, ext));
 }
 

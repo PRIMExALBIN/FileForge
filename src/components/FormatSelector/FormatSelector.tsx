@@ -11,7 +11,6 @@ import {
 } from '@/components/ui/select';
 import { getSuggestedFormats, QUICK_CONVERT_SUGGESTIONS } from '@/utils/formatDetector';
 import { FORMATS } from '@/constants/formats';
-import type { FormatCategory } from '@/types';
 
 interface FormatSelectorProps {
     inputFormat: string;

@@ -22,7 +22,7 @@ export async function createZip(
                 reject(err);
             } else {
                 if (onProgress) onProgress(100);
-                resolve(new Blob([data as any], { type: 'application/zip' }));
+                resolve(new Blob([data], { type: 'application/zip' }));
             }
         });
     });
@@ -43,10 +43,10 @@ export async function extractZip(
             if (err) {
                 reject(err);
             } else {
-                const files = Object.entries(data).map(([name, content]) => ({
-                    name,
-                    blob: new Blob([content as any]),
-                }));
+                        const files = Object.entries(data).map(([name, content]) => ({
+                            name,
+                            blob: new Blob([content as Uint8Array]),
+                        }));
                 if (onProgress) onProgress(100);
                 resolve(files);
             }
@@ -93,22 +93,8 @@ export async function convertArchive(
         // Or we treat it as a successful conversion that produced multiple files.
 
         const extracted = await extractZip(file, onProgress);
-        // Map to just blobs (but we lose filenames if we just return blobs array... 
-        // convertFile signature returns Promise<Blob | Blob[]>)
-
-        // The current system relies on the file array index to name them? 
-        // No, `useConversion` handles `Blob[]` by naming them `output_1`, `output_2` etc or using provided names if possible?
-        // Actually `useConversion` implementation:
-        // if (Array.isArray(result)) { ... downloadZip(result) ... }
-
-        // We need to pass metadata back.
-        // For now, we will attach properties to the Blob if needed, or simply return blobs and accept the system zips them.
-        // Use Case: "Convert to Extracted" -> Returns ZIP? No.
-
-        // Let's implement basics first.
-
-        // If outputFormat is not supported specific archive, throw.
-        return [];
+        // Return extracted blobs array for the UI to handle individually
+        return extracted.map((item) => item.blob);
     }
 
     throw new Error(`Archive conversion for ${outputFormat} not supported`);

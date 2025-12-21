@@ -11,9 +11,10 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.j
  */
 export async function imagesToPDF(
     files: File[],
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     const pdfDoc = await PDFDocument.create();
 
     for (let i = 0; i < files.length; i++) {
@@ -62,7 +63,7 @@ export async function imagesToPDF(
     const pdfBytes = await pdfDoc.save();
     onProgress?.(100);
 
-    return new Blob([pdfBytes as any], { type: 'application/pdf' });
+    return new Blob([pdfBytes], { type: 'application/pdf' });
 }
 
 /**
@@ -103,7 +104,7 @@ export async function pdfToImages(
         const quality = (options.quality || 85) / 100;
 
         const blob = await new Promise<Blob>((resolve) => {
-            canvas.toBlob((blob) => resolve(blob as any), mimeType, quality);
+                    canvas.toBlob((blob) => resolve(blob as Blob | null), mimeType, quality);
         });
 
         // Add to ZIP with page number
@@ -141,13 +142,13 @@ export async function pdfToText(
         const page = await pdf.getPage(pageNum);
         const textContent = await page.getTextContent();
         const pageText = textContent.items
-            .map((item: any) => item.str)
+            .map((item: unknown) => (item as { str: string }).str)
             .join(' ');
 
         allText += `\n\n--- Page ${pageNum} ---\n\n${pageText}`;
     }
 
-    return new Blob([allText as any], { type: 'text/plain' });
+    return new Blob([allText], { type: 'text/plain' });
 }
 
 /**

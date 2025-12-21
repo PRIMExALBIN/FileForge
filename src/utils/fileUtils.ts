@@ -86,8 +86,14 @@ export function generateId(): string {
  * Sanitize filename for download
  */
 export function sanitizeFilename(filename: string): string {
-    // Remove or replace invalid characters
-    return filename.replace(/[<>:"/\\|?*\x00-\x1F]/g, '_').trim();
+    // Replace path/filename characters and control characters safely
+    const invalid = new Set(['<', '>', ':', '"', '/', '\\', '|', '?', '*']);
+    const cleaned = filename
+        .split('')
+        .map((ch) => (invalid.has(ch) || ch.charCodeAt(0) < 32 ? '_' : ch))
+        .join('')
+        .trim();
+    return cleaned;
 }
 
 /**

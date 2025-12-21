@@ -6,9 +6,10 @@ import type { ConversionOptions } from '@/types';
  */
 export async function docxToHTML(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const arrayBuffer = await file.arrayBuffer();
@@ -41,7 +42,7 @@ export async function docxToHTML(
 
     onProgress?.(100);
 
-    return new Blob([html as any], { type: 'text/html' });
+    return new Blob([html], { type: 'text/html' });
 }
 
 /**
@@ -49,9 +50,10 @@ export async function docxToHTML(
  */
 export async function docxToText(
     file: File,
-    options: ConversionOptions = {},
+    _options: ConversionOptions = {},
     onProgress?: (progress: number) => void
 ): Promise<Blob> {
+    void _options;
     onProgress?.(20);
 
     const arrayBuffer = await file.arrayBuffer();
@@ -63,5 +65,5 @@ export async function docxToText(
     const text = result.value;
     onProgress?.(100);
 
-    return new Blob([text as any], { type: 'text/plain' });
+    return new Blob([text], { type: 'text/plain' });
 }
